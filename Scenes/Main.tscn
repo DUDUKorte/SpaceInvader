@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://iidcapr21273"]
+
+[ext_resource type="PackedScene" uid="uid://o8n8r1d4vpct" path="res://Scenes/player.tscn" id="1_4wkvo"]
+[ext_resource type="PackedScene" uid="uid://bwfg1n5gtdrd1" path="res://Scenes/bullet_catcher.tscn" id="2_w71tj"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_4wkvo")]
+position = Vector2(0, 290)
+scale = Vector2(5, 5)
+
+[node name="BulletCatcher" parent="." instance=ExtResource("2_w71tj")]
+position = Vector2(0, -334)
+
+[node name="Camera2D" type="Camera2D" parent="."]
