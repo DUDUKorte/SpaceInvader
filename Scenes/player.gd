@@ -1,7 +1,10 @@
 extends Area2D
 
+class_name Player
+
 @export var speed : int = 200
 @onready var collision_rect: CollisionShape2D = $CollisionShape2D
+@onready var animation_player = $AnimationPlayer
 
 var direction := Vector2.ZERO
 var player_width : int
@@ -23,3 +26,8 @@ func _process(delta):
 	
 	position.x += speed * delta * direction.x # Delta Movement / Apply movement
 	position.x = clamp(position.x, -(win_width/2)+((player_width/2)*transform.get_scale().x), win_width/2-((player_width/2)*transform.get_scale().x))
+
+func on_player_destroy():
+	speed = 0
+	animation_player.play("destroy")
+

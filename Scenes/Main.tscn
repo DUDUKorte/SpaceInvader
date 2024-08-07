@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://iidcapr21273"]
+[gd_scene load_steps=6 format=3 uid="uid://iidcapr21273"]
 
 [ext_resource type="PackedScene" uid="uid://o8n8r1d4vpct" path="res://Scenes/player.tscn" id="1_4wkvo"]
 [ext_resource type="PackedScene" uid="uid://bwfg1n5gtdrd1" path="res://Scenes/bullet_catcher.tscn" id="2_w71tj"]
+[ext_resource type="PackedScene" uid="uid://brhhftstyfp5x" path="res://Scenes/invader_spawner.tscn" id="3_61inf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i460g"]
+size = Vector2(21, 658)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_st8ig"]
+size = Vector2(75.9987, 1118)
 
 [node name="Main" type="Node2D"]
 
@@ -12,4 +19,43 @@ scale = Vector2(5, 5)
 [node name="BulletCatcher" parent="." instance=ExtResource("2_w71tj")]
 position = Vector2(0, -334)
 
+[node name="BulletCatcher2" parent="." instance=ExtResource("2_w71tj")]
+position = Vector2(0, 364)
+
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="InvaderSpawner" parent="." instance=ExtResource("3_61inf")]
+position = Vector2(0, -235)
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="LeftWall" type="Area2D" parent="Walls"]
+position = Vector2(-574, 0)
+collision_layer = 32
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_i460g")
+
+[node name="RightWall" type="Area2D" parent="Walls"]
+position = Vector2(578, -3)
+collision_layer = 32
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_i460g")
+
+[node name="BottomWall" type="Area2D" parent="Walls"]
+position = Vector2(0, 309)
+rotation = 1.57079
+collision_layer = 32
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
+position = Vector2(-23.0006, 5.82077e-11)
+shape = SubResource("RectangleShape2D_st8ig")
+
+[connection signal="area_entered" from="Walls/LeftWall" to="InvaderSpawner" method="_on_left_wall_area_entered"]
+[connection signal="area_entered" from="Walls/RightWall" to="InvaderSpawner" method="_on_right_wall_area_entered"]
