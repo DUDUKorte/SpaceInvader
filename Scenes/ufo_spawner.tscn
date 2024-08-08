@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddc0rpdm8pjbe"]
+
+[ext_resource type="Script" path="res://Scenes/ufo_spawner.gd" id="1_6uuor"]
+[ext_resource type="Script" path="res://Scenes/SpawnTimer.gd" id="1_swid8"]
+
+[node name="UFOSpawner" type="Node2D"]
+position = Vector2(530, -284)
+script = ExtResource("1_6uuor")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+script = ExtResource("1_swid8")
+min_time = 8
+max_time = 16
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
